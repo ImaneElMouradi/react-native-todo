@@ -1,37 +1,55 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView
+} from "react-native";
 
 export default function App() {
-  const [name, setName] = useState("Imane");
-  const [age, setAge] = useState("21");
+  const [people, setPeople] = useState([
+    {
+      name: "Midorima",
+      key: "1"
+    },
+    {
+      name: "Kuroko",
+      key: "2"
+    },
 
-  const clickHandler = () => {
-    setName("Laura");
-    setAge("27");
-  };
+    {
+      name: "Kagami",
+      key: "3"
+    },
+    {
+      name: "Murasakibara",
+      key: "4"
+    },
+    {
+      name: "Aomine",
+      key: "5"
+    },
+    {
+      name: "Kise",
+      key: "6"
+    },
+    {
+      name: "Akashi",
+      key: "7"
+    }
+  ]);
 
   return (
     <View style={styles.container}>
-      <Text>Enter name:</Text>
-      <TextInput
-        multiline
-        style={styles.input}
-        placeholder="e.g. john doe"
-        onChangeText={value => setName(value)}
-      />
-      <Text>Enter age:</Text>
-      <TextInput
-        keyboardType="numeric"
-        style={styles.input}
-        placeholder="e.g. 21"
-        onChangeText={value => setAge(value)}
-      />
-      <Text>My name is {name}</Text>
-      <Text>My age is {age}</Text>
-
-      <View style={styles.buttonContainer}>
-        <Button title="update name" onPress={clickHandler} />
-      </View>
+      <ScrollView>
+        {people.map(person => (
+          <View key={person.key} style={styles.person}>
+            <Text>{person.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -40,32 +58,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    paddingTop: 40,
+    paddingHorizontal: 20
+    // alignItems: "center",
+    // justifyContent: "center"
   },
 
-  buttonContainer: {
-    marginTop: 20
-  },
-
-  input: {
-    borderWidth: 1,
-    borderColor: "#777",
-    padding: 8,
-    margin: 5,
-    width: 200
+  person: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: "pink",
+    fontSize: 24
   }
-  // header: {
-  //   backgroundColor: "pink",
-  //   padding: 20
-  // },
-
-  // boldText: {
-  //   fontWeight: "bold"
-  // },
-
-  // body: {
-  //   backgroundColor: "yellow",
-  //   padding: 20
-  // }
 });
