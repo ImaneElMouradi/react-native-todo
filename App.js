@@ -5,51 +5,57 @@ import {
   View,
   Button,
   TextInput,
-  ScrollView
+  ScrollView,
+  FlatList
 } from "react-native";
 
 export default function App() {
   const [people, setPeople] = useState([
     {
       name: "Midorima",
-      key: "1"
+      id: "1"
     },
     {
       name: "Kuroko",
-      key: "2"
+      id: "2"
     },
-
     {
       name: "Kagami",
-      key: "3"
+      id: "3"
     },
     {
       name: "Murasakibara",
-      key: "4"
+      id: "4"
     },
     {
       name: "Aomine",
-      key: "5"
+      id: "5"
     },
     {
       name: "Kise",
-      key: "6"
+      id: "6"
     },
     {
       name: "Akashi",
-      key: "7"
+      id: "7"
     }
   ]);
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <FlatList
+        numColumns={2}
+        keyExtractor={item => item.id}
+        data={people}
+        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+      />
+      {/* <ScrollView>
         {people.map(person => (
           <View key={person.key} style={styles.person}>
             <Text>{person.name}</Text>
           </View>
         ))}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
@@ -59,12 +65,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingTop: 40,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    marginTop: 24
     // alignItems: "center",
     // justifyContent: "center"
   },
 
-  person: {
+  item: {
     marginTop: 24,
     padding: 30,
     backgroundColor: "pink",
